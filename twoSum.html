@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>JavaScript Two-Sum Problem</h1>
+
+<p>Results:</p>
+<p id="result"></p>
+
+<script>
+/*
+ * Two Sum Problem
+ * 
+ * Given an array of integers (nums) and an integer (target),
+ * find and return the indices of the two numbers that add up to the target.
+ * 
+ * Each input will have exactly one solution, and each element can only be used once.
+ * The order of the indices in the output does not matter.
+ * 
+ * Example:
+ * Input: nums = [2, 7, 11, 15], target = 9
+ * Output: [0, 1] (because nums[0] + nums[1] = 9)
+ * 
+ * Approach:
+ * We use a map to store the indices of elements we've seen so far.
+ * For each element, we calculate its complement (the value needed to reach the target).
+ * If the complement exists in the map, we return the indices of the current element and its complement.
+ * If not, we store the current element's index in the map.
+ * 
+ * Time complexity: O(n) - We iterate through the array once.
+ * Space complexity: O(n) - We store the indices of elements in a map.
+ */
+
+function twoSum(nums, target) {
+    const map = new Map(); // Create a map to store the indices of elements we've seen so far
+    
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i]; // Calculate the complement needed to reach the target
+        
+        if (map.has(complement)) { // Check if the complement exists in the map
+            return [map.get(complement), i]; // If it exists, return the indices of the current element and its complement
+        }
+        
+        map.set(nums[i], i); // If the complement doesn't exist in the map, store the current element's index
+    }
+    
+    return null; // If no solution is found, return null
+}
+
+// Call the twoSum function with test cases
+const result1 = twoSum([2, 7, 11, 15], 9);
+const result2 = twoSum([3, 2, 4], 6);
+const result3 = twoSum([3, 3], 6);
+const result4 = twoSum([1, 2, 3, 4, 5], 9);
+const result5 = twoSum([-1, -2, -3, -4, -5], -9);
+
+// Display the results in the HTML
+document.getElementById("result").innerHTML = `
+    Test Case 1: ${result1}<br>
+    Test Case 2: ${result2}<br>
+    Test Case 3: ${result3}<br>
+    Test Case 4: ${result4}<br>
+    Test Case 5: ${result5}<br>
+`;
+
+</script>
+
+</body>
+</html>
